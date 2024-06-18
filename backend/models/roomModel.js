@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const roomSchema =new mongoose.Schema({
     participants:[{ type:mongoose.Schema.Types.ObjectId , ref:'User' }],
+    profile:{type:String , required:true},
     admin:{type:mongoose.Schema.Types.ObjectId , ref:'User', require:true},
     name:{type:String, requrie:true, unique:true},
     message:[{ type:mongoose.Schema.Types.ObjectId , ref:'Message', default:[] }]

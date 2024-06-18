@@ -5,11 +5,12 @@ const createRoom = async (req, res)=>{
     try{
         const admin = req.user._id
         const name = req.body.name
+        const profile = req.body.profile
         const nameCheck = await Room.findOne({name:name})
         if(!nameCheck){
             throw new Error(400 , 'Room with same Name already exists')
         }
-        const newRoom = await Room.create({admin , name })
+        const newRoom = await Room.create({admin , name , profile })
         if(!newRoom){
             throw new Error(501 , 'Room not Created')
         }
@@ -94,7 +95,7 @@ const sendMsgRoom = async(req, res)=>{
         if(!room){
             throw new Error(404 , 'Room does not exists')
         }
-        const roomMessageNew = await RoomMessage.create({senderId , roomId:room._id , message})
+        const roomMessageNew = await RoomMessage.create({senderId , senderUsername:req.user.uername, roomId:room._id , message})
         if(!roomMessageNew){
             throw new Error(501, 'Message could not be generated')
         }

@@ -140,10 +140,10 @@ const Dashboard = async (req, res)=>{
         ) : [];
         
         const allRooms = await Room.find({participants:userId}).exec()
-        const roomIdList1 = allRooms ? allRooms.map(room => room._id) : [];
+        const roomIdList1 = allRooms ? allRooms.map(room =>{ room._id, room.name}) : [];
 
         const myRooms = await Room.find({admin:userId}).exec()
-        const roomIdList2 = myRooms ? myRooms.map(room => room._id) : [];
+        const roomIdList2 = myRooms ? myRooms.map(room => {room._id, room.name}) : [];
         
         return res.status(200).json({
             "error":false,
