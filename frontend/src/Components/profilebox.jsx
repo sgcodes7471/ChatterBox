@@ -1,9 +1,9 @@
-const Profilebox = ({profilepic , id , name })=>{
+const Profilebox = ({profilepic , name })=>{
     return(
-        <div>
+        <>
             <div><img src={profilepic}/></div>
-            <div>{name}</div>
-        </div>
+            <div style={{fontWeight:'bold' , margin:'0px 5px'  , fontSize:'1rem'}}>{name}</div>
+        </>
     )
 }
 export default Profilebox

@@ -1,20 +1,19 @@
-import { Router , BrowserRouter , Routes} from 'react-router-dom'
-import Login from './Pages/Login/login'
-import Signup from './Pages/Signup/signup'
-import Dashboard from './Pages/Dashboard/dashboard'
+import { Route , BrowserRouter , Routes} from 'react-router-dom'
+import Login from './Pages/Login/login.jsx'
+import Signup from './Pages/Signup/signup.jsx'
+import Dashboard from './Pages/Dashboard/dashboard.jsx'
 
 function App() {
   
 return(
-    <>
+
     <BrowserRouter>
-        <Router>
-            <Routes exact path='/Login' element={<Login/>}/>
-            <Routes exact path='/Signup' element={<Signup/>}/>
-            <Routes exact path='/Dashboard' element={<Dashboard/>}/>
-        </Router>
+        <Routes>
+            <Route exact path='/Login' element={<Login/>}/>
+            <Route exact path='/Signup' element={<Signup/>}/>
+            <Route exact path='/Dashboard' element={<Dashboard/>}/>
+        </Routes>
     </BrowserRouter>
-    </>
 )
 }
 

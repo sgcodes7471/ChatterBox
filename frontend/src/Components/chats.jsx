@@ -1,23 +1,26 @@
-import { useState } from "react"
-
+import Profilebox from "./profilebox.jsx"
+import send from '../assets/send.svg'
 const Chats = ({profilepic , name , message})=>{
     return(
-        <div>
+        <>
             <div>
-                <div>{profilepic}</div>
-                <div>{name}</div>
+                <Profilebox profilepic={profilepic} name={name}/>
             </div>
             <div>
-                {message.map(msg=>{
+                {message.map((msg, index)=>{
                     return(
-                        <div>
+                        <div key={index}>
                         <p>{msg.username}</p>
                         <p>{msg.message}</p>
                         </div>
                     )
                 })}
             </div>
-        </div>
+            <div>
+                <input placeholder="send new message" />
+                <p><img src={send}/></p>
+            </div>
+        </>
     )
 }
 export default Chats

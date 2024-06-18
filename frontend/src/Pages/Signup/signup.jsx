@@ -1,5 +1,6 @@
 import { useState } from "react"
-import passVisiblility from "../../Components/passVisibilty.jsx"
+import {Link} from 'react-router-dom'
+import PassVisiblility from "../../Components/passVisibilty.jsx"
 
 const Signup  = ()=>{
     
@@ -19,25 +20,26 @@ const Signup  = ()=>{
     }
     
     return(<>
-        <div>
-        <div>Signup Form</div>
+        <div style={{height:'100vh' , width:'100vw' }}>
+        <h3 style={{textAlign:"center"}}>Signup Form</h3>
         <div>
         <form onSubmit={(e)=>{
             e.preventDefault()
             handlePost()
-        }}>
-        <input type="text" placeholder="Enter your username" onChange={(e)=>{setUsername(e.target.value)}}/>
+        }} >
+        <input className='input-field' type="text" placeholder="Enter your username" onChange={(e)=>{setUsername(e.target.value)}}/>
         <p>
-        <input type="radio" name="gender"/>Male
-        <input type="radio" name="gender"/>Female
+        <input style={{margin:'4px'}} type="radio" name="gender"/>Male
+        <input style={{margin:'4px'}} type="radio" name="gender"/>Female
+        <input style={{margin:'4px'}} type="radio" name="gender"/>Custom
         </p>
-        <passVisiblility placeholder={'Enter your Password'} setPassword={setPassword} setPassVisible={setPassVisible} passVisible={passVisible}/>
-        <input type="password" placeholder="Confirm your Password" onChange={(e)=>{setConfPassword(e.target.value)}}/>
-        <input type="submit" value='Signup' disabled={loading?true:false}/>
+        <PassVisiblility placeholder={'Enter your Password'} setPassword={setPassword} setPassVisible={setPassVisible} passVisible={passVisible}/>
+        <input className='input-field' type="password" placeholder="Confirm your Password" onChange={(e)=>{setConfPassword(e.target.value)}}/>
+        <input type="submit" style={{display:"block" , marginTop:'20px'}}  value='Signup' disabled={loading?true:false}/>
+        <div style={{textAlign:"center" , color:'red'}}>{error}</div>
+        <Link to='/Login' >Already have an account?</Link>
         </form>
-        <div>{error}</div>
         </div>
-        <Link to='api/user/Login'>Already have an account?</Link>
         </div>
         </>)
     }
