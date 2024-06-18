@@ -135,10 +135,15 @@ const Dashboard = async (req, res)=>{
         const userId = req.user._id
         const allConversations =  await Conversation.find({participants : userId}).exec()
 
-        const contacts = allConversations ? allConversations.flatMap(convo => 
+        const contactsId = allConversations ? allConversations.flatMap(convo => 
             convo.participants.filter(p => p.toString() !== userId.toString())
         ) : [];
         
+        const contacts =await Promise.all(contactsId.map(async (contact)=>{
+            let user = await User.findById(contact)
+            return {"profile":user.profile , "_id":user._id , "username":user.username}
+        }))
+
         const allRooms = await Room.find({participants:userId}).exec()
         const roomIdList1 = allRooms ? allRooms.map(room =>{room.profile, room._id, room.name}) : [];
 

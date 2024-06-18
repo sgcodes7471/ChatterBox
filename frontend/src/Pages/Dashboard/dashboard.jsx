@@ -7,11 +7,11 @@ import group from '../../assets/group.svg'
 
 const Dashboard = ()=>{
     const [userList , setUserList ] = useState([{"profile":"https://avatar.iran.liara.run/public/boy?username:Monu" , "username":"Mohan Singh" , "_id":"123456789"},{"profile":"https://avatar.iran.liara.run/public/girl" , "username":"Mohan Rathore" , "_id":"123456788"}, {"profile":"https://avatar.iran.liara.run/public/boy" , "username":"Mohan Rathore" , "_id":"123456787"}])
-    const [myRooms , setMyRooms]= useState([{"profile":'https://avatar.iran.liara.run/public/girl', "name":'Laude BC' , "_id":'09876544'}])
-    const [joinedRooms , setJoinedRooms]= useState([{"profile":'https://avatar.iran.liara.run/public/boy', "name":'Hatt BC' , "_id":'09876543'}])
+    const [myRooms , setMyRooms]= useState([{"profile":group, "name":'Laude BC' , "_id":'09876544'}])
+    const [joinedRooms , setJoinedRooms]= useState([{"profile":group, "name":'Hatt BC' , "_id":'09876543'}])
  
-    const [current , setCurrent] = useState("123456788")
-    const [error  , setError]=useState('No Error')
+    const [current , setCurrent] = useState({})
+    const [error  , setError]=useState('')
     const isFetchRef = useRef(false)
 
     const handleDashboard = ()=>{
@@ -43,11 +43,11 @@ const Dashboard = ()=>{
         <div className="flex" style={{margin:'20px'}}>
 
         <div className="contact-wrapper" style={{width:'12vw' , height:'60vh' , border:'1px solid white' , padding:'10px 0px' , margin:'10px'}}>
-            {userList.map(user=>{
+            {userList.map((user,index)=>{
                 return(
-                <div className="flex" style={{justifyContent:'left', cursor:'pointer' , padding:'5px' , backgroundColor:current===user._id?'rgb(0, 135, 0)':'transparent'}} 
+                <div key={index} className="flex" style={{justifyContent:'left', cursor:'pointer' , padding:'5px' , backgroundColor:current._id===user._id?'rgb(0, 135, 0)':'transparent'}} 
                 onClick={()=>{
-                    setCurrent(user._id)
+                    setCurrent(user)
                     handleGetMsg(user._id)
                     }}>
                     <Profilebox profilepic={user.profile} name={user.username}/>
@@ -57,7 +57,7 @@ const Dashboard = ()=>{
         </div>
 
         <div className="chats-wrapper" style={{width:'30vw' , height:'60vh' , border:'1px solid white' ,padding:'10px' , margin:'10px'}}>
-            {/* <Chats profilepic={current.profile} name={current.name} message={current.message}/> */}
+            <Chats profilepic={current.profile} name={current.name} message={current.message || []}/>
         </div>
 
         <div className="room-wrapper" style={{width:'20vw' , height:'60vh' , border:'1px solid white' , padding:'10px 0px' , margin:'10px'}}>

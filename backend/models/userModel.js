@@ -5,10 +5,9 @@ import crypto from 'crypto'
 import { type } from 'os';
 const userSchema = new mongoose.Schema(
     {
-        ussrname:{
+        username:{
             type:String,
             required:true,
-            lowercase:true,
             unique:true
         },
         email:{

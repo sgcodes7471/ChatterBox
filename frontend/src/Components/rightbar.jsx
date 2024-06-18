@@ -18,9 +18,9 @@ const Rightbar = ({myRooms , joinedRooms})=>{
 
             <div className="myroom-wrapper" style={{padding:'5px' , width:'50%'}}>
                 <p style={{fontWeight:"bold" , textAlign:'center'}}>My Rooms</p>
-                {myRooms.map((room)=>{
+                {myRooms.map((room , index)=>{
                     return(
-                    <div className="flex" style={{justifyContent:'left' , padding:'5px'}}>
+                    <div key={index} className="flex" style={{justifyContent:'left' , padding:'5px'}}>
                     <Profilebox profilepic={room.profile} name={room.name} />
                     </div>
                     )
@@ -29,9 +29,9 @@ const Rightbar = ({myRooms , joinedRooms})=>{
                 <hr style={{height:'50vh' , margin:'0px'}}/>
             <div className="joinedroom-wrapper" style={{padding:'5px' , width:'50%'}}>
                 <p style={{fontWeight:"bold" , textAlign:'center'}} >Joined Rooms</p>
-                {joinedRooms.map((room)=>{
+                {joinedRooms.map((room , index)=>{
                     return(
-                    <div className="flex" style={{justifyContent:'left' , padding:'5px'}}>
+                    <div key={index} className="flex" style={{justifyContent:'left' , padding:'5px'}}>
                     <Profilebox profilepic={room.profile} name={room.name} />
                     </div>
                     )
