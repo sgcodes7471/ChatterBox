@@ -1,17 +1,12 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Profilebox from "./profilebox.jsx"
+import { ChatContext } from "../Context/chatContext.js"
 
 const Rightbar = ({myRooms , joinedRooms})=>{
     const [newRoom , setNewRoom] = useState(null)
-    const [error , setError] = useState('')
 
-    const handleCreateRoom=()=>{
-        try{
-
-        }catch(error){
-            setError(error.message)
-        }
-    }
+    const {handleCreateRoom , handleRoomMsg , handleLeaveRoom, isRoom , current , setCurrent }=useContext(ChatContext)
+   
     return(
         <div style={{display:'flex' , flexDirection:'column' }}>
         <div style={{display:'flex'}}> 
@@ -20,7 +15,13 @@ const Rightbar = ({myRooms , joinedRooms})=>{
                 <p style={{fontWeight:"bold" , textAlign:'center'}}>My Rooms</p>
                 {myRooms.map((room , index)=>{
                     return(
-                    <div key={index} className="flex" style={{justifyContent:'left' , padding:'5px'}}>
+                    <div key={index} className="flex"
+                    style={{justifyContent:'left' , padding:'5px' , backgroundColor:current._id===user._id?'rgb(0, 135, 0)':'transparent'}}
+                    onClick={()=>{
+                        setCurrent(room)
+                        handleRoomMsg(room._id)
+                        isRoom.current=true
+                    }}>
                     <Profilebox profilepic={room.profile} name={room.name} />
                     </div>
                     )
@@ -31,8 +32,15 @@ const Rightbar = ({myRooms , joinedRooms})=>{
                 <p style={{fontWeight:"bold" , textAlign:'center'}} >Joined Rooms</p>
                 {joinedRooms.map((room , index)=>{
                     return(
-                    <div key={index} className="flex" style={{justifyContent:'left' , padding:'5px'}}>
+                    <div key={index} className="flex" 
+                    style={{justifyContent:'left' , padding:'5px' , backgroundColor:current._id===user._id?'rgb(0, 135, 0)':'transparent'}} 
+                    onClick={()=>{
+                        setCurrent(room)
+                        handleRoomMsg(room._id)
+                        isRoom.current=true
+                    }} >
                     <Profilebox profilepic={room.profile} name={room.name} />
+                    <button style={{backgroundColor:'rgb(250 , 0 , 0)' , border:'none' , borderRadius:'10px'  }} onClick={()=>{handleLeaveRoom(room._id)}}>Leave</button>
                     </div>
                     )
                 })}
@@ -41,7 +49,7 @@ const Rightbar = ({myRooms , joinedRooms})=>{
         </div>
         <div className="flex" style={{flexDirection:'column'}}>
             <input className="input-field" style={{width:'150px'}} type="text" placeholder="New Room Name" onChange={(e)=>{setNewRoom(e.target.value)}}/>
-            <button className="new-room-btn" disabled={(!setNewRoom)?true:false} onSubmit={handleCreateRoom}>Create New Room</button>
+            <button className="new-room-btn" disabled={(!setNewRoom)?true:false} onSubmit={()=>{handleCreateRoom(newRoom)}}>Create New Room</button>
         </div>
         </div>
     )

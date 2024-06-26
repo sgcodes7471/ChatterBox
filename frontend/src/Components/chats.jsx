@@ -1,17 +1,23 @@
 import Profilebox from "./profilebox.jsx"
 import send from '../assets/send.svg'
-const Chats = ({profilepic , name , message})=>{
+import { useContext } from "react"
+import { ChatContext } from "../Context/chatContext.js"
+const Chats = ()=>{
+    const {current , messages , handleSendMsg , handleRoomSend} = useContext(ChatContext)
     return(
         <>
             <div>
-                <Profilebox profilepic={profilepic} name={name}/>
+                <Profilebox profilepic={current.profilepic} name={current.name}/>
             </div>
             <div>
-                {message.map((msg, index)=>{
+                {messages.map((msg, index)=>{
                     return(
                         <div key={index}>
-                        {/* <p>{msg.username}</p>
-                        <p>{msg.message}</p> */}
+                            {/* hardcoding for now */}
+                            <p>Username</p>
+                            <p>Aand mand ka tola!</p>
+                        {/* <p>{msg.username}</p> */}
+                        {/* <p>{msg.message}</p> */}
                         </div>
                     )
                 })}
