@@ -9,9 +9,9 @@ return(
 
     <BrowserRouter>
         <Routes>
-            <Route exact path='/Login' element={<Login/>}/>
-            <Route exact path='/Signup' element={<Signup/>}/>
-            <Route exact path='/Dashboard' element={<Dashboard/>}/>
+            <Route exact path='api/users/Login' element={<Login/>}/>
+            <Route exact path='api/users/Signup' element={<Signup/>}/>
+            <Route exact path='api/users/Dashboard' element={<Dashboard/>}/>
         </Routes>
     </BrowserRouter>
 )

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import PassVisiblility from "../../Components/passVisibilty.jsx"
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios'
 const Login  = ()=>{
     
     const [username , setUsername] = useState('')
@@ -9,9 +10,19 @@ const Login  = ()=>{
     const [error , setError]=useState('')
     const [passVisible , setPassVisible] = useState(false)
     
-    const handlePost=()=>{
+    const navigate = useNavigate()
+
+    const handlePost=async()=>{
         try{
-            
+            setLoading(true)
+            const response = await axios.post('http://localhost:3000/api/users/Login' , {username , password})
+            if(response.status > 399 )
+                throw new Error(error.message)
+            const data=await response.data
+            if(data.error)
+                throw new Error(error.message)
+            setLoading(false)
+            navigate('/api/users/Dashboard' , {replace:true})
         }catch(error){
             setError(`Error!${error.message}`)
             setLoading(false)

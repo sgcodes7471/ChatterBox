@@ -4,6 +4,7 @@ export const ChatContext=createContext({
     isRoom:null,
     setCurrent:()=>{},
     current:null,
+    handleLogout:()=>{},
     setCurrent:()=>{},
     handleGetMsg:(id)=>{},
     handleSendMsg:(id)=>{},

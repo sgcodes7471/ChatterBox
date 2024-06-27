@@ -3,7 +3,7 @@ import send from '../assets/send.svg'
 import { useContext } from "react"
 import { ChatContext } from "../Context/chatContext.js"
 const Chats = ()=>{
-    const {current , messages , handleSendMsg , handleRoomSend} = useContext(ChatContext)
+    const {current , messages , handleSendMsg , handleRoomSend , isRoom} = useContext(ChatContext)
     return(
         <>
             <div>

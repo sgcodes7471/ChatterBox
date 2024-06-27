@@ -29,12 +29,6 @@ const userSchema = new mongoose.Schema(
         },
         refreshToken:{
             type:String
-        },
-        status:{
-            type:String
-        },       
-        online:{
-            type:Boolean
         }
     },{
         timestamps:true

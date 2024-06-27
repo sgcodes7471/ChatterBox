@@ -34,9 +34,8 @@ const Signup = async(req, res)=>{
     
     const girlPic = `https://avatar.iran.liara.run/public/girl?username=${username}`
     const boyPic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-    const clownPic = ''
-    const profile = gender==='Male'?boyPic:(gender=='Female'?girlPic:clownPic)
-    const newUser = await User.create({username , email , password,profile, verfied:false , online:false})
+    const profile = gender==='Male'?boyPic:girlPic
+    const newUser = await User.create({username , email , gender , password,profile})
     if(newUser === null){
         return res.status(505).json({
             "error":true,
@@ -55,7 +54,6 @@ const Logout = async(req, res)=>{
     try{
         let user = req.user;
         user=await User.findById(user._id)
-        user.online=false;
         user.refreshToken=undefined
         await user.save({validateBeforSave:false})
         const options ={
